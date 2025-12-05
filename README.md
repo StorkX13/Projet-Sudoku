@@ -1,2 +1,2 @@
 # Projet-Sudoku
-YLEVEL, Projet Soduko
+YLEVEL, Projet Sudoku
