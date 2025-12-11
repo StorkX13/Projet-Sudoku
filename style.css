@@ -1,56 +1,64 @@
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #F5FCFF;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5FCFF;
+}
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
 
-        .row {
-            display: flex;
-        }
+.row {
+    display: flex;
+}
 
-        .cell {
-            width: 30px;
-            height: 30px;
-            border: 1px solid black;
-            text-align: center;
-            line-height: 30px;
-            box-sizing: border-box;
-        }
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 30px;
+    box-sizing: border-box;
+}
 
-        .lightBackground {
-            background-color: #A9A9A9;
-        }
+.lightBackground {
+    background-color: #A9A9A9;
+}
 
-        .darkBackground {
-            background-color: #EBF3E8;
-        }
+.darkBackground {
+    background-color: #EBF3E8;
+}
 
-        .buttonContainer {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.buttonContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .buttonContainer button {
-            margin-right: 10px;
-        }
+.buttonContainer button {
+    margin-right: 10px;
+}
 
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+}
 
-        .correct {
-            color: green;
-        }
+.correct {
+    color: green;
+}
 
-        .incorrect {
-            color: red;
-        }
+.incorrect {
+    color: red;
+}
+
+.correctInput {
+    background-color: #caffca !important;
+}
+
+.incorrectInput {
+    background-color: #ffb3b3 !important;
+}
