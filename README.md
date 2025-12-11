@@ -13,7 +13,9 @@ Ce projet est une implémentation du célèbre jeu de logique, le Sudoku. Il per
 
 # 🛠️ Technologies Utilisées
 -HTML 
+
 -JSS
+
 -CSS
 
 # 🗂️ Struture du projet
