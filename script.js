@@ -1,81 +1,120 @@
-const grid = [];
-const sudokuDiv = document.getElementById("sudoku");
+document.addEventListener("DOMContentLoaded", function () {
+            const container = document.getElementById("container");
 
-for (let row = 0; row < 9; row++) {
-    grid[row] = [];
-    for (let col = 0; col < 9; col++) {
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = 1;
-        input.max = 9;
-        input.className = "cell";
+            function generateRandomSudoku() {
+                const puzzle = [
+                    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+                    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+                    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+                    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+                    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+                    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+                    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+                    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+                    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+                ];
+                return puzzle;
+            }
 
-        if (row % 3 === 0) input.classList.add("rowStart");
-        if (row % 3 === 2) input.classList.add("rowEnd");
+            function solveSudoku(board) {
+                const solvedPuzzle = JSON.parse(JSON.stringify(board));
+                solveHelper(solvedPuzzle);
+                return solvedPuzzle;
+            }
 
-        sudokuDiv.appendChild(input);
-        grid[row][col] = input;
-    }
-}
+            function solveHelper(board) {
+                const emptyCell = findEmptyCell(board);
+                if (!emptyCell) {
+                    return true;
+                }
 
-function isValid(board, row, col, num) {
-    num = num.toString();
-
-    for (let x = 0; x < 9; x++)
-        if (board[row][x] === num) return false;
-
-    for (let x = 0; x < 9; x++)
-        if (board[x][col] === num) return false;
-
-    const startRow = row - (row % 3);
-    const startCol = col - (col % 3);
-
-    for (let r = 0; r < 3; r++)
-        for (let c = 0; c < 3; c++)
-            if (board[startRow + r][startCol + c] === num)
-                return false;
-
-    return true;
-}
-
-function solve(board) {
-    for (let row = 0; row < 9; row++) {
-        for (let col = 0; col < 9; col++) {
-            if (board[row][col] === "") {
+                const [row, col] = emptyCell;
                 for (let num = 1; num <= 9; num++) {
-                    if (isValid(board, row, col, num)) {
-                        board[row][col] = num.toString();
-                        if (solve(board)) return true;
-                        board[row][col] = "";
+                    if (isValidMove(board, row, col, num)) {
+                        board[row][col] = num;
+                        if (solveHelper(board)) {
+                            return true;
+                        }
+                        board[row][col] = 0;
                     }
                 }
                 return false;
             }
-        }
-    }
-    return true;
-}
 
-function solveSudoku() {
-    const board = [];
+            function findEmptyCell(board) {
+                for (let row = 0; row < 9; row++) {
+                    for (let col = 0; col < 9; col++) {
+                        if (board[row][col] === 0) {
+                            return [row, col];
+                        }
+                    }
+                }
+                return null;
+            }
 
-    for (let row = 0; row < 9; row++) {
-        board[row] = [];
-        for (let col = 0; col < 9; col++)
-            board[row][col] = grid[row][col].value;
-    }
+            function isValidMove(board, row, col, num) {
+                for (let i = 0; i < 9; i++) {
+                    if (board[row][i] === num) {
+                        return false;
+                    }
+                }
+                for (let i = 0; i < 9; i++) {
+                    if (board[i][col] === num) {
+                        return false;
+                    }
+                }
+                const startRow = Math.floor(row / 3) * 3;
+                const startCol = Math.floor(col / 3) * 3;
+                for (let i = startRow; i < startRow + 3; i++) {
+                    for (let j = startCol; j < startCol + 3; j++) {
+                        if (board[i][j] === num) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
 
-    if (solve(board)) {
-        for (let row = 0; row < 9; row++)
-            for (let col = 0; col < 9; col++)
-                grid[row][col].value = board[row][col];
-    } else {
-        alert("Aucune solution trouvée !");
-    }
-}
+            function createSudokuGrid(puzzle) {
+                container.innerHTML = '';
+                puzzle.forEach((row, rowIndex) => {
+                    const rowElement = document.createElement('div');
+                    rowElement.classList.add('row');
+                    row.forEach((cell, columnIndex) => {
+                        const cellElement = document.createElement('input');
+                        cellElement.classList.add('cell');
+                        cellElement.classList
+                            .add((rowIndex + columnIndex) % 2 === 0 ?
+                                'lightBackground' : 'darkBackground');
+                        cellElement.type = 'text';
+                        cellElement.maxLength = 1;
+                        cellElement.value = cell !== 0 ? cell : '';
+                        rowElement.appendChild(cellElement);
+                    });
+                    container.appendChild(rowElement);
+                });
+            }
 
-function clearGrid() {
-    for (let row = 0; row < 9; row++)
-        for (let col = 0; col < 9; col++)
-            grid[row][col].value = "";
-}
+            let initialPuzzle = generateRandomSudoku();
+            let puzzle = JSON.parse(JSON.stringify(initialPuzzle));
+            let solvedPuzzle = [];
+
+            function solvePuzzle() {
+                solvedPuzzle = solveSudoku(puzzle);
+                createSudokuGrid(solvedPuzzle);
+            }
+
+            function resetPuzzle() {
+                initialPuzzle = generateRandomSudoku();
+                puzzle = JSON.parse(JSON.stringify(initialPuzzle));
+                solvedPuzzle = [];
+                createSudokuGrid(puzzle);
+            }
+
+            createSudokuGrid(puzzle);
+
+            document.getElementById("solveButton")
+                .addEventListener("click", solvePuzzle);
+            document.getElementById("resetButton")
+                .addEventListener("click", resetPuzzle);
+        });
