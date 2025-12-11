@@ -15,9 +15,12 @@ Ce projet est une implémentation du célèbre jeu de logique, le Sudoku. Il per
 -HTML 
 -JSS
 -CSS
+
 # 🗂️ Struture of the project
 |-Read.me
 |-index.html
 |-script.js
 |-style.css
+
 # 🛠️ Telecharger le projet
+https://github.com/StorkX13/Projet-Sudoku.git
