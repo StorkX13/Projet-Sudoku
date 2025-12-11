@@ -9,8 +9,15 @@ Ce projet est une implémentation du célèbre jeu de logique, le Sudoku. Il per
 - Génération de Grilles : Crée de nouvelles grilles de Sudoku jouables de manière aléatoire.
 - Interface Utilisateur Intuitive : Une interface claire pour entrer et modifier les nombres.
 - Fonctionnalité de Résolution : Capacité à résoudre n'importe quelle grille valide.
+- Une fonction de vérification de la grille: Vérifie que la qu'il n'y a pas de doublon par ligne ou cologne.
 
 # 🛠️ Technologies Utilisées
 -HTML 
 -JSS
 -CSS
+# 🗂️ Struture of the project
+|-Read.me
+|-index.html
+|-script.js
+|-style.css
+# 🛠️ Telecharger le projet
