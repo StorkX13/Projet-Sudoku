@@ -18,7 +18,7 @@ Ce projet est une implémentation du célèbre jeu de logique, le Sudoku. Il per
 
 -CSS
 
-# 🗂️ Struture du projet
+# 🗂️ Structure du projet
 └── Sudoku/
 
 ├── Read.me
