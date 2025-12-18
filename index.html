@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,
-                                   initial-scale=1.0">
-    <title>Sudoku Puzzle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+    <h1 class="titleRGB">Sudoku</h1>
+
+    <div id="timer" class="timer">
+        ⏱️ 00:00
+    </div>
+
+    <div class="difficultyContainer">
+        <label for="difficulty">Difficulté :</label>
+        <select id="difficulty">
+            <option value="easy">Facile</option>
+            <option value="medium" selected>Moyen</option>
+            <option value="hard">Difficile</option>
+        </select>
+    </div>
 
     <div class="container" id="container"></div>
 
@@ -19,6 +33,29 @@
         <button id="checkButton">Vérifier</button>
     </div>
 
+    <div class="funPanel">
+        <img src="danse.gif" alt="Personne qui danse" class="danseGif">
+        <p id="funText">Ça commence fort 🕺</p>
+    </div>
+
+    <div class="statsPanel">
+        <h2>📊 Statistiques</h2>
+
+        <div class="stat">
+            <span>Parties jouées</span>
+            <span id="gamesPlayed">0</span>
+        </div>
+
+        <div class="stat">
+            <span>Parties gagnées</span>
+            <span id="gamesWon">0</span>
+        </div>
+
+        <div class="stat">
+            <span>Meilleur temps</span>
+            <span id="bestTime">--:--</span>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 

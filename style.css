@@ -1,64 +1,323 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #F5FCFF;
-}
+/* =========================
+   GLOBAL
+   ========================= */
 
-.container {
+body {
+    background-color: #05050a;
+    font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+    color: #e8e8ff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    padding-top: 40px;
+    margin: 0;
 }
+
+/* =========================
+   TITRE RGB
+   ========================= */
+
+.titleRGB {
+    font-size: 48px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #ff0044,
+        #ff7b00,
+        #ffee00,
+        #44ff00,
+        #00ffee,
+        #0055ff,
+        #8800ff,
+        #ff00c8,
+        #ff0044
+    );
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    animation: titleFlow 6s linear infinite;
+    text-shadow: 0 0 18px rgba(255,255,255,0.25);
+}
+
+@keyframes titleFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================
+   TIMER & DIFFICULTÉ
+   ========================= */
+
+.timer {
+    margin: 12px 0 22px;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: #c9c9ff;
+    text-shadow: 0 0 10px rgba(120,120,255,0.6);
+}
+
+.difficultyContainer {
+    margin-bottom: 22px;
+    font-size: 0.95rem;
+    color: #c9c9ff;
+}
+
+.difficultyContainer select {
+    margin-left: 8px;
+    padding: 6px 10px;
+    background-color: #0a0a18;
+    border: 1px solid #7b2ff7;
+    border-radius: 8px;
+    color: #e8e8ff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(123,47,247,0.6);
+}
+
+/* =========================
+   CONTAINER SUDOKU RGB
+   ========================= */
+
+.container {
+    position: relative;
+    padding: 16px;
+    border-radius: 14px;
+    background-color: #0a0a18;
+    overflow: visible;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 16px;
+    background: linear-gradient(
+        90deg,
+        #ff0044,
+        #ff7b00,
+        #ffee00,
+        #44ff00,
+        #00ffee,
+        #0055ff,
+        #8800ff,
+        #ff00c8,
+        #ff0044
+    );
+    background-size: 400% 100%;
+    animation: rgbFlow 6s linear infinite;
+    z-index: -1;
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+    padding: 4px;
+}
+
+@keyframes rgbFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================
+   GRILLE SUDOKU
+   ========================= */
 
 .row {
     display: flex;
 }
 
 .cell {
-    width: 30px;
-    height: 30px;
-    border: 1px solid black;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    font-weight: 500;
     text-align: center;
-    line-height: 30px;
-    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid #35355a;
+    margin: 3px;
+    color: #e0e2ff;
+    background-color: #0d0d1a;
+    box-shadow: 0 0 8px rgba(15, 15, 40, 0.9);
+    outline: none;
+    transition: 0.2s ease;
 }
 
-.lightBackground {
-    background-color: #A9A9A9;
+.lightBackground { background-color: #151527 !important; }
+.darkBackground  { background-color: #0a0a17 !important; }
+
+.cell:focus {
+    background-color: #202040 !important;
+    border-color: #7b2ff7 !important;
+    box-shadow: 0 0 18px #7b2ff7, 0 0 26px #4f9dff !important;
 }
 
-.darkBackground {
-    background-color: #EBF3E8;
+.highlight {
+    background-color: #181832 !important;
+    box-shadow: 0 0 12px #4f9dff !important;
 }
 
-.buttonContainer {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.focusCell {
+    background-color: #252552 !important;
+    box-shadow: 0 0 20px #7b2ff7, 0 0 32px #4f9dff !important;
 }
 
-.buttonContainer button {
-    margin-right: 10px;
-}
-
-.result {
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-.correct {
-    color: green;
-}
-
-.incorrect {
-    color: red;
+.sameValue {
+    background-color: #2a1740 !important;
+    box-shadow: 0 0 20px #b370ff !important;
 }
 
 .correctInput {
-    background-color: #caffca !important;
+    background-color: #0f2d18 !important;
+    border-color: #00ff9d !important;
+    color: #a7ffdf !important;
+    box-shadow: 0 0 22px #00ff9d !important;
 }
 
 .incorrectInput {
-    background-color: #ffb3b3 !important;
+    background-color: #2b1015 !important;
+    border-color: #ff3366 !important;
+    color: #ff9cb8 !important;
+    box-shadow: 0 0 22px #ff3366 !important;
 }
+
+/* =========================
+   BOUTONS
+   ========================= */
+
+.buttonContainer {
+    margin-top: 26px;
+    display: flex;
+    gap: 14px;
+}
+
+.buttonContainer button {
+    background-color: transparent;
+    border: 2px solid #7b2ff7;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: #c4aaff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #7b2ff7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.2s ease;
+}
+
+.buttonContainer button:hover {
+    border-color: #4f9dff;
+    color: #ffffff;
+    box-shadow: 0 0 18px #4f9dff, 0 0 26px #7b2ff7;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   PANNEAU FUN (GIF)
+   ========================= */
+
+.funPanel {
+    position: fixed;
+    left: 100px;
+    top: 180px;
+
+    width: 400px;
+    padding: 20px;
+
+    background-color: #0a0a18;
+    border-radius: 18px;
+
+    border: 1px solid #35355a;
+    box-shadow: 0 0 22px rgba(123,47,247,0.45);
+
+    text-align: center;
+    opacity: 0.95;
+}
+
+.danseGif {
+    width: 300px;
+    max-width: 100%;
+    margin-bottom: 16px;
+
+    opacity: 0.95;
+    border-radius: 12px;
+
+    filter: drop-shadow(0 0 16px rgba(123,47,247,0.6));
+}
+
+.funPanel p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #c9c9ff;
+    font-style: italic;
+}
+
+/* =========================
+   PANNEAU STATS
+   ========================= */
+
+.statsPanel {
+    position: fixed;
+    right: 240px;
+    top: 200px;
+    width: 220px;
+
+    background-color: #0a0a18;
+    border-radius: 14px;
+    padding: 16px;
+
+    border: 1px solid #35355a;
+    box-shadow: 0 0 18px rgba(123,47,247,0.4);
+}
+
+.statsPanel h2 {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    text-align: center;
+    color: #c9c9ff;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: #e8e8ff;
+}
+
+.stat span:last-child {
+    font-weight: 600;
+    color: #7b9dff;
+}
+
+/* =========================
+   DÉCOR DE FOND
+   ========================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.35;
+    pointer-events: none;
+
+    background: radial-gradient(
+        circle at center,
+        rgba(120, 0, 255, 0.35),
+        transparent 70%
+    );
+}
+
+body::before { left: 0; }
+body::after  { right: 0; }
